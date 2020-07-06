@@ -1,6 +1,6 @@
 package br.com.iesp.full.stack.entidades;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,7 +37,7 @@ public class Comentario {
 	
 	@Column(name="data")
 	@Temporal(TemporalType.DATE)
-	private Date data;
+	private LocalDateTime data;
 	
 	@ManyToOne
 	private Cliente cliente;

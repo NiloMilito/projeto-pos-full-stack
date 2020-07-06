@@ -39,13 +39,13 @@ public class ClienteServico implements IGenericoCRUD<Cliente, Long> {
 	}
 
 	@Override
-	public List<Cliente> listar(Cliente filtro) {
-		return null;
+	public List<Cliente> listar() {
+		return this.clienteRepositorio.findAll();
 	}
 
 	@Override
-	public List<Cliente> listar() {
-		return this.clienteRepositorio.findAll();
+	public List<Cliente> listar(Cliente filtro) {
+		return null;
 	}
 
 }
