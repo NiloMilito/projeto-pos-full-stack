@@ -1,8 +1,5 @@
-package br.com.iesp.full.stack.entidades;
+package br.com.iesp.full.stack.dto;
 
-import javax.persistence.Column;
-
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,11 +8,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Produto extends Anuncio {
+public class ProdutoDto extends AnuncioDto {
 	
-	@Column(name="quantidade")
 	private Integer quantidade;	
 
 }

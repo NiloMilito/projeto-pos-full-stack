@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.iesp.full.stack.dto.ClienteDto;
 import br.com.iesp.full.stack.entidades.Cliente;
+import br.com.iesp.full.stack.especificacao.ClienteEspecificacao;
 import br.com.iesp.full.stack.repositorio.IClienteRepositorio;
 
 @Service
@@ -43,9 +45,9 @@ public class ClienteServico implements IGenericoCRUD<Cliente, Long> {
 		return this.clienteRepositorio.findAll();
 	}
 
-	@Override
-	public List<Cliente> listar(Cliente filtro) {
-		return null;
+	public List<Cliente> listar(ClienteDto filtro) {
+		ClienteEspecificacao pageable = new ClienteEspecificacao(filtro);
+		return this.clienteRepositorio.findAll(pageable);
 	}
 
 }

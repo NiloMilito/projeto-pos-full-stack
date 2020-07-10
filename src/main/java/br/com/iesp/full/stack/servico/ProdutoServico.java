@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.iesp.full.stack.dto.ProdutoDto;
 import br.com.iesp.full.stack.entidades.Produto;
 import br.com.iesp.full.stack.especificacao.ProdutoEspecificacao;
 import br.com.iesp.full.stack.repositorio.IProdutoRepositorio;
@@ -44,10 +45,9 @@ public class ProdutoServico implements IGenericoCRUD<Produto, Long> {
 		return this.produtoRepositorio.findAll();
 	}
 	
-	@Override
-	public List<Produto> listar(Produto filtro) {	
-		ProdutoEspecificacao page = new ProdutoEspecificacao(filtro);
-		return this.produtoRepositorio.findAll(page);
+	public List<Produto> listar(ProdutoDto filtro) {	
+		ProdutoEspecificacao pageable = new ProdutoEspecificacao(filtro);
+		return this.produtoRepositorio.findAll(pageable);
 	}
 
 }

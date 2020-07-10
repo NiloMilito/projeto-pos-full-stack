@@ -6,14 +6,16 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
+
+import br.com.iesp.full.stack.dto.ComentarioDto;
 import br.com.iesp.full.stack.entidades.Comentario;
 
 public class ComentarioEspecificacao implements Specification<Comentario> {
 
 	private static final long serialVersionUID = 1L;
-	private Comentario filtro;
+	private ComentarioDto filtro;
 		
-	public ComentarioEspecificacao(Comentario filtro) {
+	public ComentarioEspecificacao(ComentarioDto filtro) {
 		super();
 		this.filtro = filtro;
 	}

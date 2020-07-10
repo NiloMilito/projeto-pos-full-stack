@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.iesp.full.stack.dto.VendedorDto;
 import br.com.iesp.full.stack.entidades.Vendedor;
+import br.com.iesp.full.stack.especificacao.VendedorEspecificacao;
 import br.com.iesp.full.stack.repositorio.IVendedorRepositorio;
 
 @Service
@@ -38,9 +40,9 @@ public class VendedorServico implements IGenericoCRUD<Vendedor, Long>{
 		return this.vendedorRepository.getOne(id);
 	}
 
-	@Override
-	public List<Vendedor> listar(Vendedor filtro) {
-		return null;
+	public List<Vendedor> listar(VendedorDto filtro) {
+		VendedorEspecificacao pageable = new VendedorEspecificacao(filtro);
+		return this.vendedorRepository.findAll(pageable);
 	}
 
 	@Override

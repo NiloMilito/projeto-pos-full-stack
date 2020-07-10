@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.iesp.full.stack.dto.ServicoDto;
 import br.com.iesp.full.stack.entidades.Servico;
+import br.com.iesp.full.stack.especificacao.ServicoEspecificacao;
 import br.com.iesp.full.stack.repositorio.IServicoRepositorio;
 
 @Service
@@ -38,9 +40,9 @@ public class ServicoServico implements IGenericoCRUD<Servico, Long> {
 		return this.servicoRepositorio.getOne(id);
 	}
 
-	@Override
-	public List<Servico> listar(Servico filtro) {
-		return null;
+	public List<Servico> listar(ServicoDto filtro) {
+		ServicoEspecificacao pageable = new ServicoEspecificacao(filtro);
+		return this.servicoRepositorio.findAll(pageable);
 	}
 
 	@Override
