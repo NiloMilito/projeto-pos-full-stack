@@ -10,23 +10,31 @@ import br.com.iesp.full.stack.dto.ProdutoDto;
 import br.com.iesp.full.stack.entidades.Produto;
 import br.com.iesp.full.stack.especificacao.ProdutoEspecificacao;
 import br.com.iesp.full.stack.repositorio.IProdutoRepositorio;
+import br.com.iesp.full.stack.util.ConversorDtoModel;
+import br.com.iesp.full.stack.util.ConversorModelDto;
 
 @Service
-public class ProdutoServico implements IGenericoCRUD<Produto, Long> {
+public class ProdutoServico implements IGenericoCRUD<ProdutoDto, Long> {
 	
 	@Autowired
-	private IProdutoRepositorio produtoRepositorio;
+	private IProdutoRepositorio produtoRepositorio;	
+	@Autowired
+	private ConversorDtoModel conversorDtoModel;
+	@Autowired
+	private ConversorModelDto ConversorModelDto;
 
 	@Override
 	@Transactional
-	public void salvar(Produto entidade) {
-		this.produtoRepositorio.save(entidade);
+	public void salvar(ProdutoDto objectDto) {
+		Produto produto = this.conversorDtoModel.dtoToProduto(objectDto);
+		this.produtoRepositorio.save(produto);
 	}
 
 	@Override
 	@Transactional
-	public void alterar(Produto entidade) {
-		this.produtoRepositorio.save(entidade);
+	public void alterar(ProdutoDto objectDto) {
+		Produto produto = this.conversorDtoModel.dtoToProduto(objectDto);
+		this.produtoRepositorio.save(produto);
 	}
 
 	@Override
@@ -36,18 +44,22 @@ public class ProdutoServico implements IGenericoCRUD<Produto, Long> {
 	}
 
 	@Override
-	public Produto buscar(Long id) {
-		return this.produtoRepositorio.getOne(id);
+	public ProdutoDto buscar(Long id) {
+		ProdutoDto produtoDto = ConversorModelDto.produtoParaDto(this.produtoRepositorio.getOne(id));
+		return produtoDto;
 	}
 
 	@Override
-	public List<Produto> listar() {		
-		return this.produtoRepositorio.findAll();
+	public List<ProdutoDto> listar() {	
+		List<ProdutoDto> listaDto = ConversorModelDto.listaProdutoParalistaDto(this.produtoRepositorio.findAll());
+		return listaDto;
 	}
 	
-	public List<Produto> listar(ProdutoDto filtro) {	
-		ProdutoEspecificacao pageable = new ProdutoEspecificacao(filtro);
-		return this.produtoRepositorio.findAll(pageable);
+	@Override
+	public List<ProdutoDto> listar(ProdutoDto filtro) {	
+		ProdutoEspecificacao pageable = new ProdutoEspecificacao(conversorDtoModel.dtoToProduto(filtro));
+		List<ProdutoDto> listaDto = ConversorModelDto.listaProdutoParalistaDto(this.produtoRepositorio.findAll(pageable));
+		return listaDto;
 	}
 
 }

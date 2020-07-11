@@ -10,23 +10,31 @@ import br.com.iesp.full.stack.dto.ComentarioDto;
 import br.com.iesp.full.stack.entidades.Comentario;
 import br.com.iesp.full.stack.especificacao.ComentarioEspecificacao;
 import br.com.iesp.full.stack.repositorio.IComentrioRepositorio;
+import br.com.iesp.full.stack.util.ConversorDtoModel;
+import br.com.iesp.full.stack.util.ConversorModelDto;
 
 @Service
-public class ComentarioServico implements IGenericoCRUD<Comentario, Long> {
+public class ComentarioServico implements IGenericoCRUD<ComentarioDto, Long> {
 
 	@Autowired
 	private IComentrioRepositorio comentarioRepositorio;
+	@Autowired
+	private ConversorDtoModel conversorDtoModel;
+	@Autowired
+	private ConversorModelDto ConversorModelDto;
 
 	@Override
 	@Transactional
-	public void salvar(Comentario entidade) {
-		this.comentarioRepositorio.save(entidade);
+	public void salvar(ComentarioDto entidade) {
+		Comentario comentario = conversorDtoModel.dtoParaComentario(entidade);
+		this.comentarioRepositorio.save(comentario);
 	}
 
 	@Override
 	@Transactional
-	public void alterar(Comentario entidade) {
-		this.comentarioRepositorio.save(entidade);
+	public void alterar(ComentarioDto entidade) {
+		Comentario comentario = conversorDtoModel.dtoParaComentario(entidade);
+		this.comentarioRepositorio.save(comentario);
 	}
 
 	@Override
@@ -36,18 +44,21 @@ public class ComentarioServico implements IGenericoCRUD<Comentario, Long> {
 	}
 
 	@Override
-	public Comentario buscar(Long id) {
-		return this.comentarioRepositorio.getOne(id);
+	public ComentarioDto buscar(Long id) {
+		ComentarioDto comentarioDto = this.ConversorModelDto.comentarioParaDto(this.comentarioRepositorio.getOne(id));
+		return comentarioDto;
 	}
 
 	@Override
-	public List<Comentario> listar() {
-		return this.comentarioRepositorio.findAll();
+	public List<ComentarioDto> listar() {
+		List<ComentarioDto> listaDto = this.ConversorModelDto.listaComentarioParaDto(this.comentarioRepositorio.findAll());
+		return listaDto;
 	}
-
-	public List<Comentario> listar(ComentarioDto filtro) {		
+	@Override
+	public List<ComentarioDto> listar(ComentarioDto filtro) {		
 		ComentarioEspecificacao pageable = new ComentarioEspecificacao(filtro);
-		return this.comentarioRepositorio.findAll(pageable);
+		List<ComentarioDto> listaDto = this.ConversorModelDto.listaComentarioParaDto(this.comentarioRepositorio.findAll(pageable));
+		return listaDto;
 	}
 
 }

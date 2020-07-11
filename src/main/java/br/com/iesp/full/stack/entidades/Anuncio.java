@@ -1,5 +1,6 @@
 package br.com.iesp.full.stack.entidades;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -37,7 +38,7 @@ public abstract class Anuncio {
 	private String descricao;
 	
 	@Column(name="valor")
-	private Double valor;
+	private BigDecimal valor;
 	
 	@Column(name="tipo", length = 30)
 	@Enumerated(EnumType.ORDINAL)

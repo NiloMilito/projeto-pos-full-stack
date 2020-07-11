@@ -10,23 +10,31 @@ import br.com.iesp.full.stack.dto.ServicoDto;
 import br.com.iesp.full.stack.entidades.Servico;
 import br.com.iesp.full.stack.especificacao.ServicoEspecificacao;
 import br.com.iesp.full.stack.repositorio.IServicoRepositorio;
+import br.com.iesp.full.stack.util.ConversorDtoModel;
+import br.com.iesp.full.stack.util.ConversorModelDto;
 
 @Service
-public class ServicoServico implements IGenericoCRUD<Servico, Long> {
-	
+public class ServicoServico implements IGenericoCRUD<ServicoDto, Long> {
+
+	@Autowired
+	private ConversorDtoModel conversorDtoModel;
+	@Autowired
+	private ConversorModelDto ConversorModelDto;
 	@Autowired
 	private IServicoRepositorio servicoRepositorio;
 
 	@Override
 	@Transactional
-	public void salvar(Servico entidade) {
-		this.servicoRepositorio.save(entidade);
+	public void salvar(ServicoDto objectDto) {
+		Servico servico = this.conversorDtoModel.dtoParaServico(objectDto);
+		this.servicoRepositorio.save(servico);
 	}
 
 	@Override
 	@Transactional
-	public void alterar(Servico entidade) {
-		this.servicoRepositorio.save(entidade);
+	public void alterar(ServicoDto objectDto) {
+		Servico servico = this.conversorDtoModel.dtoParaServico(objectDto);
+		this.servicoRepositorio.save(servico);
 	}
 
 	@Override
@@ -36,18 +44,22 @@ public class ServicoServico implements IGenericoCRUD<Servico, Long> {
 	}
 
 	@Override
-	public Servico buscar(Long id) {
-		return this.servicoRepositorio.getOne(id);
-	}
-
-	public List<Servico> listar(ServicoDto filtro) {
-		ServicoEspecificacao pageable = new ServicoEspecificacao(filtro);
-		return this.servicoRepositorio.findAll(pageable);
+	public ServicoDto buscar(Long id) {
+		ServicoDto servicoDto = this.ConversorModelDto.ServicoParaDto(this.servicoRepositorio.getOne(id));
+		return servicoDto;
 	}
 
 	@Override
-	public List<Servico> listar() {
-		return this.servicoRepositorio.findAll();
+	public List<ServicoDto> listar(ServicoDto filtro) {
+		ServicoEspecificacao pageable = new ServicoEspecificacao(this.conversorDtoModel.dtoParaServico(filtro));
+		List<ServicoDto> listaDto = this.ConversorModelDto.listaServicoParaDto(this.servicoRepositorio.findAll(pageable));
+		return listaDto;
+	}
+
+	@Override
+	public List<ServicoDto> listar() {
+		List<ServicoDto> listaDto = this.ConversorModelDto.listaServicoParaDto(this.servicoRepositorio.findAll());
+		return listaDto;
 	}
 
 }

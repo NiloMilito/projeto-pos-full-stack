@@ -40,24 +40,24 @@ public class ClienteEspecificacao implements Specification<Cliente> {
 			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("sobreNome")), "%"+ filtro.getSobreNome().toUpperCase() +"%"));
 		}
 		
-		if (filtro.getEndereco().getCep() != null) {
-			predicate.getExpressions().add(criteriaBuilder.and(criteriaBuilder.equal(root.get("cep"), filtro.getEndereco().getCep())));
+		if (filtro.getEnderecoDto().getCep() != null) {
+			predicate.getExpressions().add(criteriaBuilder.and(criteriaBuilder.equal(root.get("cep"), filtro.getEnderecoDto().getCep())));
 		}
 		
-		if (filtro.getEndereco().getUf() != null) {
-			predicate.getExpressions().add(criteriaBuilder.and(criteriaBuilder.equal(root.get("uf"), filtro.getEndereco().getUf())));
+		if (filtro.getEnderecoDto().getUf() != null) {
+			predicate.getExpressions().add(criteriaBuilder.and(criteriaBuilder.equal(root.get("uf"), filtro.getEnderecoDto().getUf())));
 		}		
 		
-		if (filtro.getEndereco().getCidade() != null) {
-			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("cidade")), "%"+ filtro.getEndereco().getCidade().toUpperCase() +"%"));
+		if (filtro.getEnderecoDto().getCidade() != null) {
+			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("cidade")), "%"+ filtro.getEnderecoDto().getCidade().toUpperCase() +"%"));
 		}	
 		
-		if (filtro.getEndereco().getLogradouro() != null) {
-			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("logradouro")), "%"+ filtro.getEndereco().getLogradouro().toUpperCase() +"%"));
+		if (filtro.getEnderecoDto().getLogradouro() != null) {
+			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("logradouro")), "%"+ filtro.getEnderecoDto().getLogradouro().toUpperCase() +"%"));
 		}
 		
-		if (filtro.getEndereco().getBairro() != null) {
-			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("bairro")), "%"+ filtro.getEndereco().getBairro().toUpperCase() +"%"));
+		if (filtro.getEnderecoDto().getBairro() != null) {
+			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("bairro")), "%"+ filtro.getEnderecoDto().getBairro().toUpperCase() +"%"));
 		}
 				
 		return predicate;

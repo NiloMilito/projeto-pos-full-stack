@@ -10,23 +10,31 @@ import br.com.iesp.full.stack.dto.ClienteDto;
 import br.com.iesp.full.stack.entidades.Cliente;
 import br.com.iesp.full.stack.especificacao.ClienteEspecificacao;
 import br.com.iesp.full.stack.repositorio.IClienteRepositorio;
+import br.com.iesp.full.stack.util.ConversorDtoModel;
+import br.com.iesp.full.stack.util.ConversorModelDto;
 
 @Service
-public class ClienteServico implements IGenericoCRUD<Cliente, Long> {
+public class ClienteServico implements IGenericoCRUD<ClienteDto, Long> {
 	
 	@Autowired
 	private IClienteRepositorio clienteRepositorio;
+	@Autowired
+	private ConversorDtoModel conversorDtoModel;
+	@Autowired
+	private ConversorModelDto ConversorModelDto;
 
 	@Override
 	@Transactional
-	public void salvar(Cliente entidade) {
-		this.clienteRepositorio.save(entidade);
+	public void salvar(ClienteDto entidade) {
+		Cliente cliente = this.conversorDtoModel.dtoParaCliente(entidade);
+		this.clienteRepositorio.save(cliente);
 	}
 
 	@Override
 	@Transactional
-	public void alterar(Cliente entidade) {
-		this.clienteRepositorio.save(entidade);
+	public void alterar(ClienteDto entidade) {
+		Cliente cliente = this.conversorDtoModel.dtoParaCliente(entidade);
+		this.clienteRepositorio.save(cliente);
 	}
 
 	@Override
@@ -36,18 +44,22 @@ public class ClienteServico implements IGenericoCRUD<Cliente, Long> {
 	}
 
 	@Override
-	public Cliente buscar(Long id) {		
-		return this.clienteRepositorio.getOne(id);
+	public ClienteDto buscar(Long id) {		
+		ClienteDto clienteDto = this.ConversorModelDto.clienteParaDto(this.clienteRepositorio.getOne(id));
+		return clienteDto;
 	}
 
 	@Override
-	public List<Cliente> listar() {
-		return this.clienteRepositorio.findAll();
+	public List<ClienteDto> listar() {
+		List<ClienteDto> listaDto = this.ConversorModelDto.listaClienteParaDto(this.clienteRepositorio.findAll());
+		return listaDto;
 	}
 
-	public List<Cliente> listar(ClienteDto filtro) {
+	@Override
+	public List<ClienteDto> listar(ClienteDto filtro) {
 		ClienteEspecificacao pageable = new ClienteEspecificacao(filtro);
-		return this.clienteRepositorio.findAll(pageable);
+		List<ClienteDto> listaDto = this.ConversorModelDto.listaClienteParaDto(this.clienteRepositorio.findAll(pageable));
+		return listaDto;
 	}
 
 }

@@ -7,15 +7,14 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import br.com.iesp.full.stack.dto.ServicoDto;
 import br.com.iesp.full.stack.entidades.Servico;
 
 public class ServicoEspecificacao implements Specification<Servico>{
 	
 	private static final long serialVersionUID = -4700559709295381560L;
-	private ServicoDto filtro;
+	private Servico filtro;
 	
-	public ServicoEspecificacao(ServicoDto filtro) {
+	public ServicoEspecificacao(Servico filtro) {
 		super();
 		this.filtro = filtro;
 	}
@@ -36,13 +35,9 @@ public class ServicoEspecificacao implements Specification<Servico>{
 			predicate.getExpressions().add(criteriaBuilder.and(criteriaBuilder.equal(root.get("valor"), filtro.getValor())));
 		}
 		
-		if (filtro.getVendedorDto() != null) {
-			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("nome")), "%"+ filtro.getVendedorDto().getNome().toUpperCase() + "%"));
-		}
-		
-		if (filtro.getClienteDto() != null) {
-			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("nome")), "%"+ filtro.getClienteDto().getNome().toUpperCase() + "%"));
-		}
+		if (filtro.getVendedor() != null) {
+			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("nome")), "%"+ filtro.getVendedor().getNome().toUpperCase() + "%"));
+		}	
 		
 		return predicate;
 	}

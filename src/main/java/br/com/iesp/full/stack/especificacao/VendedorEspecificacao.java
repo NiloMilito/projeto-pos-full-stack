@@ -7,15 +7,14 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import br.com.iesp.full.stack.dto.VendedorDto;
 import br.com.iesp.full.stack.entidades.Vendedor;
 
 public class VendedorEspecificacao implements Specification<Vendedor> {
 
 	private static final long serialVersionUID = 2328432794915497781L;
-	private VendedorDto filtro;		
+	private Vendedor filtro;		
 
-	public VendedorEspecificacao(VendedorDto filtro) {
+	public VendedorEspecificacao(Vendedor filtro) {
 		super();
 		this.filtro = filtro;
 	}
