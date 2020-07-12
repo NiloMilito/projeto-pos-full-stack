@@ -14,6 +14,7 @@ public abstract class PessoaDto {
 	private String sobreNome;
 	private String cpf;
 	private String email;
+	private String telefone;
 	private EnderecoDto enderecoDto;
 	@Override
 	public int hashCode() {

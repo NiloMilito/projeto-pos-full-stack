@@ -38,6 +38,10 @@ public abstract class Pessoa {
 	@NotEmpty(message="CPF é obrigatório")
 	private String cpf;
 	
+	@Column(name="telefone", unique=true, length = 13)
+	@NotEmpty(message="Telefone é obrigatório")
+	private String telefone;
+	
 	@Column(name="email", length = 200)
 	@Email(message="Endereço de e-mail em um formato inválido.")
 	private String email;

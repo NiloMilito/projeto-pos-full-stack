@@ -39,6 +39,7 @@ public class ConversorModelDto {
 		vendedorDto.setNome(vendedor.getNome());
 		vendedorDto.setEmail(vendedor.getEmail());
 		vendedorDto.setSobreNome(vendedor.getSobreNome());
+		vendedorDto.setTelefone(vendedor.getTelefone());
 		vendedorDto.setSituacao(vendedor.getSituacao());
 		vendedorDto.setIndice(vendedor.getIndice());
 		vendedorDto.setEnderecoDto(enderecoParaDto(vendedor.getEndereco()));
@@ -108,6 +109,7 @@ public class ConversorModelDto {
 		clienteDto.setNome(cliente.getNome());
 		clienteDto.setEmail(cliente.getEmail());
 		clienteDto.setSobreNome(cliente.getSobreNome());
+		clienteDto.setTelefone(cliente.getTelefone());
 		clienteDto.setEnderecoDto(enderecoParaDto(cliente.getEndereco()));		
 		return clienteDto;
 	}
