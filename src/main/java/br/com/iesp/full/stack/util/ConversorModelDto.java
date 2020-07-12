@@ -61,39 +61,61 @@ public class ConversorModelDto {
 		return listaDto;
 	}
 
-	public ServicoDto ServicoParaDto(Servico one) {
-		// TODO Auto-generated method stub
-		return null;
+	public ServicoDto servicoParaDto(Servico servico) {
+		ServicoDto servicoDto = new ServicoDto();
+		servicoDto.setId(servico.getId());
+		servicoDto.setDescricao(servico.getDescricao());
+		servicoDto.setValor(servico.getValor());
+		servicoDto.setTipo(servico.getTipo());
+		servicoDto.setData(servico.getData());
+		servicoDto.setVendedorDto(vendedorParaDto(servico.getVendedor()));
+		servicoDto.setMaoDeObra(servico.getMaoDeObra());
+		servicoDto.setMaterial(servico.getMaterial());		
+		return servicoDto;
 	}
 
-	public List<ServicoDto> listaServicoParaDto(List<Servico> findAll) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ServicoDto> listaServicoParaDto(List<Servico> lista) {
+		List<ServicoDto> listaDto = new ArrayList<>();
+		lista.forEach(l -> listaDto.add(servicoParaDto(l)));
+		return listaDto;
 	}
 
-	public List<VendedorDto> listaVendedorParaDto(List<Vendedor> findAll) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<VendedorDto> listaVendedorParaDto(List<Vendedor> lista) {
+		List<VendedorDto> listaDto = new ArrayList<>();
+		lista.forEach(l -> listaDto.add(vendedorParaDto(l)));
+		return listaDto;
 	}
 
-	public ComentarioDto comentarioParaDto(Comentario one) {
-		// TODO Auto-generated method stub
-		return null;
+	public ComentarioDto comentarioParaDto(Comentario comentario) {
+		ComentarioDto comentarioDto = new ComentarioDto();
+		comentarioDto.setId(comentario.getId());
+		comentarioDto.setDescricao(comentario.getDescricao());
+		comentarioDto.setData(comentario.getData());
+		comentarioDto.setClienteDto(clienteParaDto(comentario.getCliente()));
+		return comentarioDto;
 	}
 
-	public List<ComentarioDto> listaComentarioParaDto(List<Comentario> findAll) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ComentarioDto> listaComentarioParaDto(List<Comentario> lista) {
+		List<ComentarioDto> listaDto = new ArrayList<>();
+		lista.forEach(l -> listaDto.add(comentarioParaDto(l)));
+		return listaDto;
 	}
 
-	public ClienteDto clienteParaDto(Cliente one) {
-		// TODO Auto-generated method stub
-		return null;
+	public ClienteDto clienteParaDto(Cliente cliente) {
+		ClienteDto clienteDto = new ClienteDto();
+		clienteDto.setId(cliente.getId());
+		clienteDto.setCpf(cliente.getCpf());
+		clienteDto.setNome(cliente.getNome());
+		clienteDto.setEmail(cliente.getEmail());
+		clienteDto.setSobreNome(cliente.getSobreNome());
+		clienteDto.setEnderecoDto(enderecoParaDto(cliente.getEndereco()));		
+		return clienteDto;
 	}
 
-	public List<ClienteDto> listaClienteParaDto(List<Cliente> findAll) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ClienteDto> listaClienteParaDto(List<Cliente> lista) {
+		List<ClienteDto> listaDto = new ArrayList<>();
+		lista.forEach(l -> listaDto.add(clienteParaDto(l)));
+		return listaDto;
 	}
 
 }

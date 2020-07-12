@@ -1,5 +1,7 @@
 package br.com.iesp.full.stack.dto;
 
+import java.math.BigDecimal;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +13,6 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = true)
 public class ServicoDto extends AnuncioDto {
 
-	private double maoDeObra;	
-	private double material; 
+	private BigDecimal maoDeObra;	
+	private BigDecimal material; 
 }

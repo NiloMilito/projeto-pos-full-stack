@@ -1,5 +1,7 @@
 package br.com.iesp.full.stack.entidades;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 
 import lombok.AllArgsConstructor;
@@ -16,9 +18,9 @@ import lombok.Setter;
 public class Servico extends Anuncio {
 	
 	@Column(name="mao_de_obra")
-	private double maoDeObra;
+	private BigDecimal maoDeObra;
 	
 	@Column(name="material")
-	private double material; 
+	private BigDecimal material; 
 	
 }

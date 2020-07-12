@@ -51,18 +51,35 @@ public class ConversorDtoModel {
 		return endereco;
 	}
 
-	public Servico dtoParaServico(ServicoDto objectDto) {
-		// TODO Auto-generated method stub
-		return null;
+	public Servico dtoParaServico(ServicoDto servicoDto) {
+		Servico servico = new Servico();
+		servico.setDescricao(servicoDto.getDescricao());
+		servico.setValor(servicoDto.getValor());
+		servico.setTipo(servicoDto.getTipo());
+		servico.setData(servicoDto.getData());
+		servico.setVendedor(dtoParaVendedor(servicoDto.getVendedorDto()));
+		servico.setMaoDeObra(servicoDto.getMaoDeObra());
+		servico.setMaterial(servicoDto.getMaterial());
+		return servico;
 	}
 
-	public Comentario dtoParaComentario(ComentarioDto entidade) {
-		// TODO Auto-generated method stub
-		return null;
+	public Comentario dtoParaComentario(ComentarioDto comentarioDto) {
+		Comentario comentario = new Comentario();
+		comentario.setId(comentarioDto.getId());
+		comentario.setDescricao(comentarioDto.getDescricao());
+		comentario.setData(comentario.getData());
+		comentario.setCliente(dtoParaCliente(comentarioDto.getClienteDto()));
+		return comentario;
 	}
 
-	public Cliente dtoParaCliente(ClienteDto entidade) {
-		// TODO Auto-generated method stub
-		return null;
+	public Cliente dtoParaCliente(ClienteDto clienteDto) {
+		Cliente cliente = new Cliente();
+		cliente.setId(clienteDto.getId());
+		cliente.setCpf(clienteDto.getCpf());
+		cliente.setNome(clienteDto.getNome());
+		cliente.setSobreNome(clienteDto.getSobreNome());
+		cliente.setEmail(clienteDto.getEmail());
+		cliente.setEndereco(dtoParaEndereco(clienteDto.getEnderecoDto()));
+		return cliente;
 	}
 }

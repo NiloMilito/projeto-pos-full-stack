@@ -45,7 +45,7 @@ public class ServicoServico implements IGenericoCRUD<ServicoDto, Long> {
 
 	@Override
 	public ServicoDto buscar(Long id) {
-		ServicoDto servicoDto = this.ConversorModelDto.ServicoParaDto(this.servicoRepositorio.getOne(id));
+		ServicoDto servicoDto = this.ConversorModelDto.servicoParaDto(this.servicoRepositorio.getOne(id));
 		return servicoDto;
 	}
 
