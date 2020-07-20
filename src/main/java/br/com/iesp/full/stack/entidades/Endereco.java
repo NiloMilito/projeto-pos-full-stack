@@ -1,7 +1,10 @@
 package br.com.iesp.full.stack.entidades;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 import lombok.Getter;
@@ -10,7 +13,8 @@ import lombok.Setter;
 @Embeddable
 @Getter
 @Setter
-public class Endereco {
+@Table(name="endereco")
+public class Endereco implements Serializable {
 	
 	@Column(name="cep", length = 9)
 	@NotEmpty(message="CEP é obrigatório")

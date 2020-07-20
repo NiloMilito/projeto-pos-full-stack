@@ -22,9 +22,6 @@ import lombok.Setter;
 public class Cliente extends Pessoa {
 	
 	private static final long serialVersionUID = -6562612563502393382L;
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")
-	private List<Servico> servicos = new ArrayList<>();
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")
 	private List<Comentario> comentarios = new ArrayList<>();

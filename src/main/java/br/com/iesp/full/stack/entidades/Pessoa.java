@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -23,10 +24,9 @@ import lombok.Setter;
 @MappedSuperclass
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name="pessoa")
 public abstract class Pessoa implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 5415217476107395225L;
 
 	@Id
