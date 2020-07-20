@@ -52,8 +52,12 @@ public class ClienteEspecificacao implements Specification<Cliente> {
 			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("cidade")), "%"+ filtro.getEnderecoDto().getCidade().toUpperCase() +"%"));
 		}	
 		
-		if (filtro.getEnderecoDto().getLogradouro() != null) {
-			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("logradouro")), "%"+ filtro.getEnderecoDto().getLogradouro().toUpperCase() +"%"));
+		if (filtro.getEnderecoDto().getNumero() != 0) {
+			predicate.getExpressions().add(criteriaBuilder.and(criteriaBuilder.equal(root.get("numero"), filtro.getEnderecoDto().getNumero())));
+		}
+		
+		if (filtro.getEnderecoDto().getRua() != null) {
+			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("rua")), "%"+ filtro.getEnderecoDto().getRua().toUpperCase() +"%"));
 		}
 		
 		if (filtro.getEnderecoDto().getBairro() != null) {

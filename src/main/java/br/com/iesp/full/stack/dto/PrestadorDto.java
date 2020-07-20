@@ -9,10 +9,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
-public class VendedorDto extends PessoaDto {
+public class PrestadorDto extends PessoaDto {
 
 	private String situacao;
 	private Integer indice;
 	private List<ServicoDto> servicosDto;
-	private List<ProdutoDto> produtosDto;
+
 }

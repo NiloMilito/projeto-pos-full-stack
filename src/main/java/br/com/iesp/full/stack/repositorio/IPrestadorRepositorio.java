@@ -4,9 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import br.com.iesp.full.stack.entidades.Produto;
+import br.com.iesp.full.stack.entidades.Prestador;
 
 @Repository
-public interface IProdutoRepositorio extends JpaRepository<Produto, Long>, JpaSpecificationExecutor<Produto> {
+public interface IPrestadorRepositorio extends JpaRepository<Prestador, Long>, JpaSpecificationExecutor<Prestador> {
 
 }

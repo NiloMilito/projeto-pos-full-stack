@@ -1,9 +1,8 @@
 package br.com.iesp.full.stack.entidades;
 
-import javax.persistence.Column;
+import java.math.BigDecimal;
 
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,10 +11,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class Produto extends Anuncio {
+public class ContratoServico {
 	
-	@Column(name="quantidade")
-	private Integer quantidade;	
-
+	private Cliente cliente;
+	
+	private Prestador prestador;
+	
+	private BigDecimal valor;
+	
 }

@@ -8,32 +8,19 @@ import org.springframework.stereotype.Component;
 import br.com.iesp.full.stack.dto.ClienteDto;
 import br.com.iesp.full.stack.dto.ComentarioDto;
 import br.com.iesp.full.stack.dto.EnderecoDto;
-import br.com.iesp.full.stack.dto.ProdutoDto;
+import br.com.iesp.full.stack.dto.PrestadorDto;
 import br.com.iesp.full.stack.dto.ServicoDto;
-import br.com.iesp.full.stack.dto.VendedorDto;
 import br.com.iesp.full.stack.entidades.Cliente;
 import br.com.iesp.full.stack.entidades.Comentario;
 import br.com.iesp.full.stack.entidades.Endereco;
-import br.com.iesp.full.stack.entidades.Produto;
+import br.com.iesp.full.stack.entidades.Prestador;
 import br.com.iesp.full.stack.entidades.Servico;
-import br.com.iesp.full.stack.entidades.Vendedor;
 
 @Component
-public class ConversorModelDto {
-	
-	public ProdutoDto produtoParaDto(Produto produto) {
-		ProdutoDto produtoDto = new ProdutoDto();
-		produtoDto.setDescricao(produto.getDescricao());
-		produtoDto.setValor(produto.getValor());
-		produtoDto.setTipo(produto.getTipo());
-		produtoDto.setData(produto.getData());
-		produtoDto.setVendedorDto(vendedorParaDto(produto.getVendedor()));
-		produtoDto.setQuantidade(produtoDto.getQuantidade());
-		return produtoDto;
-	}
+public class ConversorModelDto {	
 
-	public VendedorDto vendedorParaDto(Vendedor vendedor) {
-		VendedorDto vendedorDto = new VendedorDto();
+	public PrestadorDto prestadorParaDto(Prestador vendedor) {
+		PrestadorDto vendedorDto = new PrestadorDto();
 		vendedorDto.setId(vendedor.getId());
 		vendedorDto.setCpf(vendedor.getCpf());
 		vendedorDto.setNome(vendedor.getNome());
@@ -52,26 +39,13 @@ public class ConversorModelDto {
 		enderecoDto.setUf(endereco.getUf());
 		enderecoDto.setCidade(endereco.getCidade());
 		enderecoDto.setBairro(endereco.getBairro());
-		enderecoDto.setLogradouro(endereco.getLogradouro());
+		enderecoDto.setRua(endereco.getRua());
 		return enderecoDto;
 	}
 
-	public List<ProdutoDto> listaProdutoParalistaDto(List<Produto> lista) {
-		List<ProdutoDto> listaDto = new ArrayList<>();
-		lista.forEach(p -> listaDto.add(produtoParaDto(p)));
-		return listaDto;
-	}
-
 	public ServicoDto servicoParaDto(Servico servico) {
+		//ServicoDto servicoDto = ServicoMapper.INSTANCE.servicoParaDto(servico);	
 		ServicoDto servicoDto = new ServicoDto();
-		servicoDto.setId(servico.getId());
-		servicoDto.setDescricao(servico.getDescricao());
-		servicoDto.setValor(servico.getValor());
-		servicoDto.setTipo(servico.getTipo());
-		servicoDto.setData(servico.getData());
-		servicoDto.setVendedorDto(vendedorParaDto(servico.getVendedor()));
-		servicoDto.setMaoDeObra(servico.getMaoDeObra());
-		servicoDto.setMaterial(servico.getMaterial());		
 		return servicoDto;
 	}
 
@@ -81,9 +55,9 @@ public class ConversorModelDto {
 		return listaDto;
 	}
 
-	public List<VendedorDto> listaVendedorParaDto(List<Vendedor> lista) {
-		List<VendedorDto> listaDto = new ArrayList<>();
-		lista.forEach(l -> listaDto.add(vendedorParaDto(l)));
+	public List<PrestadorDto> listaVendedorParaDto(List<Prestador> lista) {
+		List<PrestadorDto> listaDto = new ArrayList<>();
+		lista.forEach(l -> listaDto.add(prestadorParaDto(l)));
 		return listaDto;
 	}
 

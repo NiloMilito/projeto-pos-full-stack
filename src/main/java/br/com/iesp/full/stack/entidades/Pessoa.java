@@ -1,5 +1,7 @@
 package br.com.iesp.full.stack.entidades;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -21,7 +23,12 @@ import lombok.Setter;
 @MappedSuperclass
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class Pessoa {
+public abstract class Pessoa implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5415217476107395225L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

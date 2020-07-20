@@ -17,7 +17,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Vendedor extends Pessoa {
+public class Prestador extends Pessoa {
 	
 	@Column(name="situacao", length = 30)
 	private String situacao;
@@ -27,8 +27,5 @@ public class Vendedor extends Pessoa {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "vendedor")
 	private List<Servico> servicos;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "vendedor")
-	private List<Produto> produtos;
 
 }

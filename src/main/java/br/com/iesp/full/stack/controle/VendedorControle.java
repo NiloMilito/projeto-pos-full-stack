@@ -19,19 +19,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.iesp.full.stack.dto.VendedorDto;
-import br.com.iesp.full.stack.servico.VendedorServico;
+import br.com.iesp.full.stack.dto.PrestadorDto;
+import br.com.iesp.full.stack.servico.PrestadorServico;
 
 @Controller
 @RequestMapping("/vendedor")
-public class VendedorControle implements IControler<VendedorDto, Serializable>{
+public class VendedorControle implements IControler<PrestadorDto, Serializable>{
 	
 	@Autowired
-	private VendedorServico vendedorServico;
+	private PrestadorServico vendedorServico;
 
 	@Override
 	@PostMapping("/savar")
-	public ModelAndView salvar(@Valid VendedorDto object, BindingResult result, Model model,
+	public ModelAndView salvar(@Valid PrestadorDto object, BindingResult result, Model model,
 			RedirectAttributes attributes) {
 		ModelAndView mv = new ModelAndView("redirect:/vendedores");
 		if (result.hasErrors()) {
@@ -44,7 +44,7 @@ public class VendedorControle implements IControler<VendedorDto, Serializable>{
 
 	@Override
 	@GetMapping("/novo")
-	public ModelAndView novo(VendedorDto novo) {
+	public ModelAndView novo(PrestadorDto novo) {
 		ModelAndView mv = new ModelAndView("/pages/vendedores/novo");
 		mv.addObject("vendedore", novo);
 		return mv;
@@ -53,7 +53,7 @@ public class VendedorControle implements IControler<VendedorDto, Serializable>{
 	@Override
 	@GetMapping("/atualisar/{id}")
 	public ModelAndView atualisar(@PathVariable("id") Long id) {
-		VendedorDto vendedorDto = this.vendedorServico.buscar(id);
+		PrestadorDto vendedorDto = this.vendedorServico.buscar(id);
 		return novo(vendedorDto);
 	}
 
@@ -68,10 +68,10 @@ public class VendedorControle implements IControler<VendedorDto, Serializable>{
 
 	@Override
 	@GetMapping
-	public ModelAndView listar(@ModelAttribute("filtro") VendedorDto filtro) {
+	public ModelAndView listar(@ModelAttribute("filtro") PrestadorDto filtro) {
 		ModelAndView mv = new ModelAndView("/vendedores/listar");
 		if (!StringUtils.isEmpty(filtro)) {
-			List<VendedorDto> servicos = this.vendedorServico.listar(filtro);
+			List<PrestadorDto> servicos = this.vendedorServico.listar(filtro);
 			mv.addObject("vendedores", servicos);
 		} else {
 			mv.addObject("vendedores", vendedorServico.listar());

@@ -1,0 +1,51 @@
+
+
+CREATE TABLE IF NOT EXISTS pessoa (
+	id INT NOT NULL AUTO_INCREMENT,
+	nome VARCHAR(200) NOT NULL,
+	sobre_nome VARCHAR(200) NOT NULL,
+	cpf VARCHAR(14) NOT NULL UNIQUE,
+	telefone VARCHAR(13) NOT NULL,
+	email VARCHAR(200) NOT NULL UNIQUE,
+	CONSTRAINT endereco_id FOREIGN KEY (endereco_id) REFERENCES endereco (id),
+	PRIMARY KEY (id)  
+ );
+ 
+CREATE TABLE IF NOT EXISTS endereco (
+	id INT NOT NULL AUTO_INCREMENT,
+	cep VARCHAR(9) NOT NULL,
+	rua VARCHAR(200) NOT NULL,
+	numero INT NOT NULL,
+	bairro VARCHAR(200) NOT NULL,
+	cidade VARCHAR(200) NOT NULL,
+	uf VARCHAR(3) NOT NULL,
+	PRIMARY KEY (id)  
+);
+ 
+CREATE TABLE IF NOT EXISTS cliente (
+	CONSTRAINT pessoa_id FOREIGN KEY (pessoa_id) REFERENCES pessoa (id),
+	nome varchar(20) NOT NULL,
+	role varchar(20) NOT NULL,
+	
+	PRIMARY KEY (usuario_id)
+);
+
+CREATE TABLE IF NOT EXISTS servico (
+	id INT NOT NULL AUTO_INCREMENT,
+	descricao VARCHAR (200) NOT NULL,
+	preco FLOAT NOT NULL,
+	data DATE,
+	mao_de_obra FLOAT,
+	material BIGDECIMAL,
+	CONSTRAINT prestador_id FOREIGN KEY (prestador_id) REFERENCES prestador (id),
+	PRIMARY KEY (id)    
+);
+
+CREATE TABLE IF NOT EXISTS comentario (
+	id INT NOT NULL AUTO_INCREMENT,
+	ativo INT NOT NULL,
+	nome VARCHAR (100) NOT NULL,
+	email VARCHAR (100) NOT NULL,
+	PRIMARY KEY (id)
+    
+);

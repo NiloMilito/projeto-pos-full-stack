@@ -16,6 +16,9 @@ public abstract class PessoaDto {
 	private String email;
 	private String telefone;
 	private EnderecoDto enderecoDto;
+	private String login;
+	private String senha;
+			
 	@Override
 	public int hashCode() {
 		final int prime = 31;

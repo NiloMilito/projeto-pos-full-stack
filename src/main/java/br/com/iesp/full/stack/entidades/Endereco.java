@@ -16,9 +16,13 @@ public class Endereco {
 	@NotEmpty(message="CEP é obrigatório")
 	private String cep;
 	
-	@Column(name="logradouro", length = 200)
-	@NotEmpty(message="Logradouro é obrigatório")
-	private String logradouro;
+	@Column(name="rua", length = 200)
+	@NotEmpty(message="Rua é obrigatório")
+	private String rua;
+	
+	@Column(name="numero")
+	@NotEmpty(message="Número é obrigatório")
+	private int numero;
 	
 	@Column(name="bairro", length = 200)
 	@NotEmpty(message="Bairro é obrigatório")

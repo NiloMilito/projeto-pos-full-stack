@@ -5,31 +5,18 @@ import org.springframework.stereotype.Component;
 import br.com.iesp.full.stack.dto.ClienteDto;
 import br.com.iesp.full.stack.dto.ComentarioDto;
 import br.com.iesp.full.stack.dto.EnderecoDto;
-import br.com.iesp.full.stack.dto.ProdutoDto;
+import br.com.iesp.full.stack.dto.PrestadorDto;
 import br.com.iesp.full.stack.dto.ServicoDto;
-import br.com.iesp.full.stack.dto.VendedorDto;
 import br.com.iesp.full.stack.entidades.Cliente;
 import br.com.iesp.full.stack.entidades.Comentario;
 import br.com.iesp.full.stack.entidades.Endereco;
-import br.com.iesp.full.stack.entidades.Produto;
+import br.com.iesp.full.stack.entidades.Prestador;
 import br.com.iesp.full.stack.entidades.Servico;
-import br.com.iesp.full.stack.entidades.Vendedor;
 @Component
 public class ConversorDtoModel {
-	
-	public Produto dtoToProduto(ProdutoDto produtoDto) {
-		Produto produto = new Produto();
-		produto.setDescricao(produtoDto.getDescricao());
-		produto.setValor(produtoDto.getValor());
-		produto.setTipo(produtoDto.getTipo());
-		produto.setData(produtoDto.getData());
-		produto.setVendedor(dtoParaVendedor(produtoDto.getVendedorDto()));
-		produto.setQuantidade(produtoDto.getQuantidade());
-		return produto;
-	}
 
-	public Vendedor dtoParaVendedor(VendedorDto vendedorDto) {
-		Vendedor vendedor = new Vendedor();
+	public Prestador dtoParaVendedor(PrestadorDto vendedorDto) {
+		Prestador vendedor = new Prestador();
 		vendedor.setId(vendedorDto.getId());
 		vendedor.setCpf(vendedorDto.getCpf());
 		vendedor.setNome(vendedorDto.getNome());
@@ -48,15 +35,13 @@ public class ConversorDtoModel {
 		endereco.setUf(enderecoDto.getUf());
 		endereco.setCidade(enderecoDto.getCidade());
 		endereco.setBairro(enderecoDto.getBairro());
-		endereco.setLogradouro(enderecoDto.getLogradouro());
+		endereco.setRua(enderecoDto.getRua());
 		return endereco;
 	}
 
 	public Servico dtoParaServico(ServicoDto servicoDto) {
 		Servico servico = new Servico();
 		servico.setDescricao(servicoDto.getDescricao());
-		servico.setValor(servicoDto.getValor());
-		servico.setTipo(servicoDto.getTipo());
 		servico.setData(servicoDto.getData());
 		servico.setVendedor(dtoParaVendedor(servicoDto.getVendedorDto()));
 		servico.setMaoDeObra(servicoDto.getMaoDeObra());

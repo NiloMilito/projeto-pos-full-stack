@@ -7,20 +7,20 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import br.com.iesp.full.stack.entidades.Vendedor;
+import br.com.iesp.full.stack.entidades.Prestador;
 
-public class VendedorEspecificacao implements Specification<Vendedor> {
+public class VendedorEspecificacao implements Specification<Prestador> {
 
 	private static final long serialVersionUID = 2328432794915497781L;
-	private Vendedor filtro;		
+	private Prestador filtro;		
 
-	public VendedorEspecificacao(Vendedor filtro) {
+	public VendedorEspecificacao(Prestador filtro) {
 		super();
 		this.filtro = filtro;
 	}
 
 	@Override
-	public Predicate toPredicate(Root<Vendedor> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+	public Predicate toPredicate(Root<Prestador> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 		Predicate predicate = criteriaBuilder.disjunction();
 
 		if (filtro.getNome() != null) {
@@ -51,12 +51,13 @@ public class VendedorEspecificacao implements Specification<Vendedor> {
 			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("cidade")), "%"+ filtro.getEndereco().getCidade().toUpperCase() +"%"));
 		}	
 		
-		if (filtro.getEndereco().getLogradouro() != null) {
-			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("logradouro")), "%"+ filtro.getEndereco().getLogradouro().toUpperCase() +"%"));
+
+		if (filtro.getEndereco().getNumero() != 0) {
+			predicate.getExpressions().add(criteriaBuilder.and(criteriaBuilder.equal(root.get("numero"), filtro.getEndereco().getNumero())));
 		}
 		
-		if (filtro.getEndereco().getBairro() != null) {
-			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("bairro")), "%"+ filtro.getEndereco().getBairro().toUpperCase() +"%"));
+		if (filtro.getEndereco().getRua() != null) {
+			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("rua")), "%"+ filtro.getEndereco().getRua().toUpperCase() +"%"));
 		}
 		
 		return predicate;
