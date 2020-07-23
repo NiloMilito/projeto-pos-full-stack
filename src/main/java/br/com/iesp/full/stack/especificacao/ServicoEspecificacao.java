@@ -31,8 +31,8 @@ public class ServicoEspecificacao implements Specification<Servico>{
 			predicate.getExpressions().add(criteriaBuilder.and(criteriaBuilder.equal(root.get("data"), filtro.getData())));
 		}		
 		
-		if (filtro.getVendedor() != null) {
-			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("nome")), "%"+ filtro.getVendedor().getNome().toUpperCase() + "%"));
+		if (filtro.getPrestador() != null) {
+			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("nome")), "%"+ filtro.getPrestador().getNome().toUpperCase() + "%"));
 		}	
 		
 		return predicate;

@@ -43,7 +43,7 @@ public class ConversorDtoModel {
 		Servico servico = new Servico();
 		servico.setDescricao(servicoDto.getDescricao());
 		servico.setData(servicoDto.getData());
-		servico.setVendedor(dtoParaVendedor(servicoDto.getVendedorDto()));
+		servico.setPrestador(dtoParaVendedor(servicoDto.getVendedorDto()));
 		servico.setMaoDeObra(servicoDto.getMaoDeObra());
 		servico.setMaterial(servicoDto.getMaterial());
 		return servico;

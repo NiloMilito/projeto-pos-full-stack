@@ -13,9 +13,14 @@ import lombok.Setter;
 @Embeddable
 @Getter
 @Setter
-@Table(name="endereco")
+@Table(name="tb_endereco")
 public class Endereco implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6723656109097524710L;
+
 	@Column(name="cep", length = 9)
 	@NotEmpty(message="CEP é obrigatório")
 	private String cep;

@@ -18,7 +18,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="cliente")
+@Table(name="tb_cliente")
 public class Cliente extends Pessoa {
 	
 	private static final long serialVersionUID = -6562612563502393382L;

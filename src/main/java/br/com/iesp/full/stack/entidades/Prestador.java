@@ -1,5 +1,6 @@
 package br.com.iesp.full.stack.entidades;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -18,7 +19,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="prestador")
+@Table(name="tb_prestador")
 public class Prestador extends Pessoa {	
 
 	private static final long serialVersionUID = 1545455920456712964L;
@@ -30,6 +31,6 @@ public class Prestador extends Pessoa {
 	private Integer indice;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "prestador")
-	private List<Servico> servicos;
+	private List<Servico> servicos = new ArrayList<>();
 
 }
