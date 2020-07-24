@@ -58,7 +58,7 @@ public class ClienteControle implements IControler<ClienteDto, Serializable> {
 	@Override
 	@GetMapping
 	public List<ClienteDto> listar(@ModelAttribute("filtro") ClienteDto filtro) {
-		if (!StringUtils.isEmpty(filtro)) {
+		if (!StringUtils.isEmpty(filtro) && filtro.getId() != null) {
 			return this.clienteServico.listar(filtro);
 		} else {
 			return clienteServico.listar();

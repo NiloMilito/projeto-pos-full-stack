@@ -22,14 +22,11 @@ public class ClienteServico implements IGenericoCRUD<ClienteDto, Long> {
 	private ConversorDtoModel conversorDtoModel;
 	@Autowired
 	private ConversorModelDto ConversorModelDto;
-//	@Autowired
-//	private IGenericoMapper mapper;
+
 
 	@Override
 	@Transactional
 	public void salvar(ClienteDto entidade) {
-		//Cliente cliente = this.conversorDtoModel.dtoParaCliente(entidade);
-		//this.clienteRepositorio.save(mapper.dtoParaCliente(entidade));
 		Cliente cliente = this.conversorDtoModel.dtoParaCliente(entidade);
 		this.clienteRepositorio.save(cliente);
 	}
@@ -51,7 +48,6 @@ public class ClienteServico implements IGenericoCRUD<ClienteDto, Long> {
 	public ClienteDto buscar(Long id) {		
 		ClienteDto clienteDto = this.ConversorModelDto.clienteParaDto(this.clienteRepositorio.getOne(id));
 		return clienteDto;
-//		return this.mapper.clienteParaDto(this.clienteRepositorio.getOne(id));
 	}
 
 	@Override
