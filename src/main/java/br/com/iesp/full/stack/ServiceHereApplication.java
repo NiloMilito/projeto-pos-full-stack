@@ -1,4 +1,4 @@
-package br.com.iesp.full.stack.serviceHere;
+package br.com.iesp.full.stack;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -14,7 +14,7 @@ public class ClienteEspecificacao implements Specification<Cliente> {
 
 	private static final long serialVersionUID = 198073256922776203L;
 	private ClienteDto filtro;
-		
+
 	public ClienteEspecificacao(ClienteDto filtro) {
 		super();
 		this.filtro = filtro;
@@ -25,45 +25,56 @@ public class ClienteEspecificacao implements Specification<Cliente> {
 		Predicate predicate = criteriaBuilder.disjunction();
 
 		if (filtro.getNome() != null) {
-			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("nome")), "%"+ filtro.getNome().toUpperCase() +"%"));
+			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("nome")),
+					"%" + filtro.getNome().toUpperCase() + "%"));
 		}
 
 		if (filtro.getEmail() != null) {
-			predicate.getExpressions().add(criteriaBuilder.and(criteriaBuilder.equal(root.get("email"), filtro.getEmail())));
+			predicate.getExpressions()
+					.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("email"), filtro.getEmail())));
 		}
-		
+
 		if (filtro.getCpf() != null) {
-			predicate.getExpressions().add(criteriaBuilder.and(criteriaBuilder.equal(root.get("cpf"), filtro.getCpf())));
+			predicate.getExpressions()
+					.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("cpf"), filtro.getCpf())));
 		}
-		
+
 		if (filtro.getSobreNome() != null) {
-			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("sobreNome")), "%"+ filtro.getSobreNome().toUpperCase() +"%"));
+			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("sobreNome")),
+					"%" + filtro.getSobreNome().toUpperCase() + "%"));
 		}
-		
-		if (filtro.getEnderecoDto().getCep() != null) {
-			predicate.getExpressions().add(criteriaBuilder.and(criteriaBuilder.equal(root.get("cep"), filtro.getEnderecoDto().getCep())));
+		if (filtro.getEnderecoDto() != null) {
+
+			if (filtro.getEnderecoDto().getCep() != null) {
+				predicate.getExpressions().add(
+						criteriaBuilder.and(criteriaBuilder.equal(root.get("cep"), filtro.getEnderecoDto().getCep())));
+			}
+
+			if (filtro.getEnderecoDto().getUf() != null) {
+				predicate.getExpressions().add(
+						criteriaBuilder.and(criteriaBuilder.equal(root.get("uf"), filtro.getEnderecoDto().getUf())));
+			}
+
+			if (filtro.getEnderecoDto().getCidade() != null) {
+				predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("cidade")),
+						"%" + filtro.getEnderecoDto().getCidade().toUpperCase() + "%"));
+			}
+
+			if (filtro.getEnderecoDto().getNumero() != 0) {
+				predicate.getExpressions().add(criteriaBuilder
+						.and(criteriaBuilder.equal(root.get("numero"), filtro.getEnderecoDto().getNumero())));
+			}
+
+			if (filtro.getEnderecoDto().getRua() != null) {
+				predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("rua")),
+						"%" + filtro.getEnderecoDto().getRua().toUpperCase() + "%"));
+			}
+
+			if (filtro.getEnderecoDto().getBairro() != null) {
+				predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("bairro")),
+						"%" + filtro.getEnderecoDto().getBairro().toUpperCase() + "%"));
+			}
 		}
-		
-		if (filtro.getEnderecoDto().getUf() != null) {
-			predicate.getExpressions().add(criteriaBuilder.and(criteriaBuilder.equal(root.get("uf"), filtro.getEnderecoDto().getUf())));
-		}		
-		
-		if (filtro.getEnderecoDto().getCidade() != null) {
-			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("cidade")), "%"+ filtro.getEnderecoDto().getCidade().toUpperCase() +"%"));
-		}	
-		
-		if (filtro.getEnderecoDto().getNumero() != 0) {
-			predicate.getExpressions().add(criteriaBuilder.and(criteriaBuilder.equal(root.get("numero"), filtro.getEnderecoDto().getNumero())));
-		}
-		
-		if (filtro.getEnderecoDto().getRua() != null) {
-			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("rua")), "%"+ filtro.getEnderecoDto().getRua().toUpperCase() +"%"));
-		}
-		
-		if (filtro.getEnderecoDto().getBairro() != null) {
-			predicate.getExpressions().add(criteriaBuilder.like(criteriaBuilder.upper(root.get("bairro")), "%"+ filtro.getEnderecoDto().getBairro().toUpperCase() +"%"));
-		}
-				
 		return predicate;
 	}
 

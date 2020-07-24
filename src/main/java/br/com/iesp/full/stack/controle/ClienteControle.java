@@ -6,8 +6,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,68 +13,62 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.iesp.full.stack.dto.ClienteDto;
 import br.com.iesp.full.stack.servico.ClienteServico;
 
-@Controller
+@RestController
 @RequestMapping("/clientes")
 public class ClienteControle implements IControler<ClienteDto, Serializable> {
 
 	@Autowired
 	private ClienteServico clienteServico;
-	
+
 	@Override
-	@PostMapping("/savar")
-	public ModelAndView salvar(@Valid ClienteDto object, BindingResult result, Model model,
-			RedirectAttributes attributes) {
-		ModelAndView mv = new ModelAndView("redirect:/clientes");
+	@PostMapping("/salvar")
+	public void salvar(@RequestBody @Valid ClienteDto object, BindingResult result, RedirectAttributes attributes) {
 		if (result.hasErrors()) {
-			return novo(object);
+			attributes.addAttribute("mensagem", "Erro de Validação!");
 		}
 		attributes.addAttribute("mensagem", "Cliente salvo com sucesso");
 		this.clienteServico.salvar(object);
-		return mv;
-	}
-	
-	@Override
-	@GetMapping("/novo")
-	public ModelAndView novo(ClienteDto novo) {
-		ModelAndView mv = new ModelAndView("/pages/servicos/novo");
-		mv.addObject("cliente", novo);
-		return mv;
 	}
 
 	@Override
 	@GetMapping("/atualisar/{id}")
-	public ModelAndView atualisar(@PathVariable("id") Long id) {
-		ClienteDto clienteDto = this.clienteServico.buscar(id);
-		return novo(clienteDto);
+	public void atualisar(@RequestBody @Valid ClienteDto object, BindingResult result, RedirectAttributes attributes) {
+		if (result.hasErrors()) {
+			attributes.addAttribute("mensagem", "Erro de Validação!");
+		}
+		attributes.addAttribute("mensagem", "Cliente alterado com sucesso");
+		this.clienteServico.alterar(object);
 	}
 
 	@Override
 	@DeleteMapping("/remover/{id}")
-	public ModelAndView remover(@PathVariable Long id, RedirectAttributes attributes) {
-		ModelAndView mv = new ModelAndView("redirect:/clientes");
+	public void remover(@PathVariable Long id, RedirectAttributes attributes) {
 		this.clienteServico.remover(id);
-		attributes.addFlashAttribute("removido", "Servico removido com sucesso!");
-		return mv;
+		attributes.addFlashAttribute("removido", "Cliente removido com sucesso!");
 	}
 
 	@Override
 	@GetMapping
-	public ModelAndView listar(@ModelAttribute("filtro") ClienteDto filtro) {
-		ModelAndView mv = new ModelAndView("/clientes/listar");
+	public List<ClienteDto> listar(@ModelAttribute("filtro") ClienteDto filtro) {
 		if (!StringUtils.isEmpty(filtro)) {
-			List<ClienteDto> servicos = this.clienteServico.listar(filtro);
-			mv.addObject("clientes", servicos);
+			return this.clienteServico.listar(filtro);
 		} else {
-			mv.addObject("clientes", clienteServico.listar());
+			return clienteServico.listar();
 		}
-		return mv;
+	}
+
+	@Override
+	@GetMapping("/buscar/{id}")
+	public ClienteDto buscar(Long id) {
+		return this.clienteServico.buscar(id);
 	}
 
 }
