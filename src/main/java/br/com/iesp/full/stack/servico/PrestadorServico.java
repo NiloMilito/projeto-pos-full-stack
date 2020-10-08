@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.iesp.full.stack.dto.PrestadorDto;
 import br.com.iesp.full.stack.entidades.Prestador;
-import br.com.iesp.full.stack.especificacao.VendedorEspecificacao;
+import br.com.iesp.full.stack.especificacao.PrestadorEspecificacao;
 import br.com.iesp.full.stack.repositorio.IPrestadorRepositorio;
 import br.com.iesp.full.stack.util.ConversorDtoModel;
 import br.com.iesp.full.stack.util.ConversorModelDto;
@@ -50,7 +50,7 @@ public class PrestadorServico implements IGenericoCRUD<PrestadorDto, Long>{
 	}
 	@Override
 	public List<PrestadorDto> listar(PrestadorDto filtro) {
-		VendedorEspecificacao pageable = new VendedorEspecificacao(this.conversorDtoModel.dtoParaVendedor(filtro));
+		PrestadorEspecificacao pageable = new PrestadorEspecificacao(this.conversorDtoModel.dtoParaVendedor(filtro));
 		List<PrestadorDto> listaDto = this.ConversorModelDto.listaVendedorParaDto(this.vendedorRepository.findAll(pageable));
 		return listaDto;
 	}

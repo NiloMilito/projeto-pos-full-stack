@@ -9,12 +9,12 @@ import org.springframework.data.jpa.domain.Specification;
 
 import br.com.iesp.full.stack.entidades.Prestador;
 
-public class VendedorEspecificacao implements Specification<Prestador> {
+public class PrestadorEspecificacao implements Specification<Prestador> {
 
 	private static final long serialVersionUID = 2328432794915497781L;
 	private Prestador filtro;		
 
-	public VendedorEspecificacao(Prestador filtro) {
+	public PrestadorEspecificacao(Prestador filtro) {
 		super();
 		this.filtro = filtro;
 	}
